@@ -10,9 +10,9 @@ CREATE TABLE PostalCode (
 CREATE TABLE TableBooking (
   TableBookingID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   TableNumber int(255),
-  BookingDate datetime,
+  BookingDate date,
+  BookingTime timestamp,
   NumberOfGuests int(255),
-  IsBooked boolean,
   CustomerID int NOT NULL,
   RestaurantID int NOT NULL,
   FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
