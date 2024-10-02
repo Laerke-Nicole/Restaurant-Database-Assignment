@@ -2,16 +2,21 @@
   CREATE DATABASE RestaurantDB;
   USE RestaurantDB;
 
+-- Table with postal code
   CREATE TABLE PostalCode (
     PostalCode varchar(20) NOT NULL PRIMARY KEY,
     City varchar(168)
   ) ENGINE=InnoDB;
 
+
+-- Table with tables
   CREATE TABLE `Table` (
     TableID int NOT NULL AUTO_INCREMENT PRIMARY KEY, 
     TableNumber int(255)
   ) ENGINE=InnoDB;
 
+
+-- Table with customer info
   CREATE TABLE Customer (
     CustomerID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     FirstName varchar(50),
@@ -24,7 +29,7 @@
   ) ENGINE=InnoDB;
 
 
-
+-- table with restaurant info
   CREATE TABLE Restaurant (
     RestaurantID int NOT NULL AUTO_INCREMENT PRIMARY KEY, 
     Name varchar(100),
@@ -35,6 +40,8 @@
     FOREIGN KEY (PostalCode) REFERENCES PostalCode(PostalCode)
   ) ENGINE=InnoDB;
 
+
+-- table with table booking info
   CREATE TABLE TableBooking (
     TableBookingID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     BookingDate date,
@@ -417,7 +424,7 @@ insert into TableBooking (TableBookingID, BookingDate, BookingTime, NumberOfGues
 
 -- Get a list of all tables in the restaurant
 SELECT *
-FROM `Table`
+FROM `Table`;
 
 
 -- Get a list of all bookings for a given customer ordered by date
