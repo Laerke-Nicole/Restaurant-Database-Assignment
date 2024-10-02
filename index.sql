@@ -420,7 +420,7 @@ insert into TableBooking (TableBookingID, BookingDate, BookingTime, NumberOfGues
 
 
 
--- opgaver
+-- tasks
 
 -- Get a list of all tables in the restaurant
 SELECT *
