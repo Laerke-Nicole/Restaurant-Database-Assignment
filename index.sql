@@ -4,7 +4,7 @@
 
 -- Table with postal code
   CREATE TABLE PostalCode (
-    PostalCode varchar(20) NOT NULL PRIMARY KEY,
+    PostalCode varchar(10) NOT NULL PRIMARY KEY,
     City varchar(168)
   ) ENGINE=InnoDB;
 
@@ -17,7 +17,7 @@
     Email varchar(63),
     PhoneNumber varchar(15),
     Address varchar(255),
-    PostalCode varchar(20),
+    PostalCode varchar(10),
     FOREIGN KEY (PostalCode) REFERENCES PostalCode(PostalCode)
   ) ENGINE=InnoDB;
 
@@ -29,7 +29,7 @@
     Email varchar(63),
     PhoneNumber varchar(15),
     Address varchar(255),
-    PostalCode varchar(20),
+    PostalCode varchar(10),
     FOREIGN KEY (PostalCode) REFERENCES PostalCode(PostalCode)
   ) ENGINE=InnoDB;
 
@@ -37,7 +37,7 @@
 -- Table with tables
   CREATE TABLE `Table` (
     TableID int NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-    TableNumber int(60),
+    TableNumber int(60)
   ) ENGINE=InnoDB;
 
 
@@ -47,7 +47,6 @@
     BookingDate date,
     BookingTime varchar(8),
     NumberOfGuests int(25),
-    AmountOfTablesBooked int(3),
     TableID int NOT NULL,
     CustomerID int NOT NULL,
     RestaurantID int NOT NULL,
@@ -466,23 +465,28 @@ FROM `Table`;
 -- Get a list of all bookings for a given customer ordered by date
 SELECT  c.FirstName, c.LastName, 
 tb.BookingDate, tb.BookingTime, tb.NumberOfGuests,
-t.TableNumber
+t.TableNumber, r.Name AS "RestaurantName"
 FROM TableBooking tb
 JOIN Customer c ON tb.CustomerID = c.CustomerID
 JOIN `Table` t ON tb.TableID = t.TableID
+JOIN restaurant r ON tb.RestaurantID = r.RestaurantID
 WHERE tb.CustomerID = 1
 ORDER BY tb.BookingDate ASC,
     tb.BookingTime ASC;
 
 
--- -- Get a list of all bookings for a given tableID, including the customers for a specific date
+-- -- Get a list of all bookings for a given tableID, 
+-- including the customers for a specific date
 SELECT  c.FirstName, c.LastName,
 tb.BookingDate, tb.BookingTime, tb.NumberOfGuests,
-t.TableNumber
+t.TableNumber, r.Name AS "RestaurantName"
 FROM TableBooking tb
 JOIN Customer c ON tb.CustomerID = c.CustomerID
 JOIN `Table` t ON tb.TableID = t.TableID
+JOIN restaurant r ON tb.RestaurantID = r.RestaurantID
 WHERE tb.TableID = 1
 AND tb.BookingDate = '2024-01-05'
 ORDER BY tb.BookingTime ASC;
+
+
 
